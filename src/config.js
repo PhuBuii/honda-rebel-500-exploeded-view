@@ -9,6 +9,10 @@ export const config = {
     rubber: '#0d0e0f',
     leather: '#17181a', // yên xe
   },
+  sound: {
+    volume: 0.5, // độ to tổng của tiếng máy, từ 0 đến 1
+    musicVolume: 0.8, // độ to của nhạc nền khi có ảnh kỷ niệm, từ 0 đến 1
+  },
   motion: {
     explodeSeconds: 1.6,
     staggerSeconds: 0.06,

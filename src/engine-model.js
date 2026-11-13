@@ -50,10 +50,17 @@ export function approach(current, target, dt) {
   return current + clamp(target - current, -step, step);
 }
 
-// Độ to của tiếng máy, từ 0 đến 1.
-export function engineLevel({ ride, exploded, focused, enabled }) {
+// Độ to của tiếng máy, từ 0 đến 1. memories là mức dải ảnh kỷ niệm đang hiện (0 đến 1):
+// có ảnh thì hạ tiếng xe xuống để nhạc nền nổi lên.
+export function engineLevel({ ride, exploded, focused, enabled, memories = 0 }) {
   if (!enabled) return 0;
   const running = 0.5 + 0.5 * clamp(ride, 0, 1);
   const together = 1 - smoothstep(exploded); // tháo rời thì máy không chạy nữa
-  return running * together * (focused ? 0.55 : 1);
+  const backing = 1 - 0.75 * clamp(memories, 0, 1);
+  return running * together * (focused ? 0.55 : 1) * backing;
+}
+
+// Độ to của nhạc nền: chỉ có khi dải ảnh kỷ niệm đang hiện, mờ dần cùng ảnh.
+export function musicLevel({ memories, enabled }) {
+  return enabled ? clamp(memories, 0, 1) : 0;
 }

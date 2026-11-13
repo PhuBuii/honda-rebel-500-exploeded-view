@@ -269,6 +269,17 @@ export function createMotion({ stage, parts, reducedMotion }) {
       ride.target = on && !reducedMotion ? 1 : 0;
     },
 
+    // Số liệu cho âm thanh: mức đang chạy, mức tháo rời, có đang xem một bộ phận không,
+    // và mức dải ảnh kỷ niệm đang hiện (bật nhạc nền, hạ tiếng xe).
+    audioState() {
+      return {
+        ride: ride.strength,
+        exploded: explodeAmount,
+        focused: view.mode === 'focused',
+        memories: ride.strength * ride.memory,
+      };
+    },
+
     // Bật hoặc tắt ảnh kỷ niệm; máy quay bay đến khung hình mới nếu đang ở cách xem toàn cảnh.
     // animate = false chỉ đặt cờ, dành cho lúc máy quay sắp bay tới khung hình đó bằng việc khác.
     async setMemories(on, animate = true) {

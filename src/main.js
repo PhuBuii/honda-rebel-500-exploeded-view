@@ -1,10 +1,11 @@
 import { content } from './content.js';
+import { createAudio } from './audio.js';
 import { createMotion } from './motion.js';
 import { PART_IDS } from './part-ids.js';
 import { buildParts, partBounds } from './parts/index.js';
 import { createPicker } from './picking.js';
 import { createStage } from './scene.js';
-import { close, createState, focus, isBrowsing, replay, setLayout, setMemories, setRiding } from './state.js';
+import { close, createState, focus, isBrowsing, replay, setLayout, setMemories, setRiding, setSound } from './state.js';
 import { createUi } from './ui.js';
 import { validateContent } from './validate-content.js';
 import './style.css';
@@ -43,7 +44,15 @@ const ui = createUi({
   partIds: PART_IDS,
   reducedMotion,
   on: {
-    start: () => enterRide(),
+    start: () => {
+      unlockSound();
+      enterRide();
+    },
+    sound: (on) => {
+      state = setSound(state, on);
+      ui.showModes(state);
+      sound?.setEnabled(on);
+    },
     layout: (layout) => changeLayout(layout),
     riding: (riding) => changeRiding(riding),
     memories: (on) => applyRide((s) => setMemories(s, on)),
@@ -51,6 +60,22 @@ const ui = createUi({
     tagAction: () => (state.screen === 'finale' ? replayBike() : closePart()),
   },
 });
+
+// Tiếng máy và nhạc nền chỉ tạo được sau lần bấm đầu tiên của người xem (trình duyệt chặn tự phát âm thanh).
+let sound = null;
+
+function unlockSound() {
+  if (sound || !(window.AudioContext || window.webkitAudioContext)) return;
+  try {
+    sound = createAudio({ musicSrc: content.music || undefined });
+    sound.setEnabled(state.sound);
+    sound.unlock();
+    sound.start();
+  } catch (error) {
+    console.warn('Không bật được âm thanh', error);
+    sound = null;
+  }
+}
 
 // Nút ở trang mở đầu: vào thẳng cảnh nguyên xe, xe chạy và ảnh kỷ niệm đã bật sẵn.
 let photosReady = Promise.resolve(0);
@@ -199,6 +224,13 @@ function start() {
     if (event.key === 'Escape' && state.screen === 'focused') closePart();
   });
 
+  // Trang bị ẩn thì tắt hẳn tiếng máy, hiện lại thì chạy tiếp.
+  document.addEventListener('visibilitychange', () => {
+    if (!sound) return;
+    if (document.hidden) sound.pause();
+    else sound.resume();
+  });
+
   window.addEventListener('resize', () => {
     stage.resize();
     motion.refit();
@@ -215,6 +247,7 @@ function start() {
     const dt = Math.min((now - last) / 1000, 0.25);
     last = now;
     motion.tick(dt);
+    sound?.update(dt, motion.audioState());
     stage.controls.update(dt);
     stage.renderer.render(stage.scene, stage.camera);
   });
@@ -224,6 +257,7 @@ function start() {
     window.__rebel = {
       state: () => state,
       busy: () => busy,
+      sound: () => sound,
       pick,
       stage,
       motion,

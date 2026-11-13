@@ -61,6 +61,10 @@ describe('content.js', () => {
     for (const id of PART_IDS) expect(typeof content.parts[id].action, id).toBe('string');
   });
 
+  it('points the optional song at a file that exists in public/', () => {
+    if (content.music) expect(fs.existsSync(path.join('public', content.music)), content.music).toBe(true);
+  });
+
   it('points every photo at a file that exists in public/', () => {
     for (const photo of content.photos ?? []) {
       expect(fs.existsSync(path.join('public', photo.src)), photo.src).toBe(true);

@@ -42,6 +42,11 @@ export function createUi({ content, partIds, reducedMotion, on }) {
   const memoriesToggle = byId('memories-toggle');
   memoriesToggle.addEventListener('change', () => on.memories(memoriesToggle.checked));
 
+  // Ô "Tiếng xe" chỉ hiện khi trình duyệt có Web Audio.
+  const soundToggle = byId('sound-toggle');
+  byId('sound-label').hidden = !(window.AudioContext || window.webkitAudioContext);
+  soundToggle.addEventListener('change', () => on.sound(soundToggle.checked));
+
   const chipFor = new Map();
   for (const id of partIds) {
     const li = document.createElement('li');
@@ -123,6 +128,7 @@ export function createUi({ content, partIds, reducedMotion, on }) {
         button.setAttribute('aria-pressed', String((button.dataset.riding === 'true') === state.riding));
       }
       memoriesToggle.checked = state.memories;
+      soundToggle.checked = state.sound;
     },
 
     // Ô "Ảnh kỷ niệm" chỉ hiện khi có ít nhất một ảnh tải được và xe có thể chạy.

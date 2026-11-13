@@ -10,6 +10,11 @@ export const content = {
   // Hiện khi người xem đã đọc hết 12 bộ phận và xe lắp lại.
   finale: `HAPPY BIRTHDAY bé iu!`,
 
+  // Nhạc nền phát khi dải ảnh kỷ niệm hiện ra; lúc đó tiếng xe được hạ nhỏ lại cho nhạc nổi lên.
+  // Để trống ("") thì dùng đoạn nhạc lãng mạn có sẵn trong trang. Muốn dùng bài hát của riêng bạn:
+  // bỏ file (mp3, m4a...) vào thư mục public rồi ghi tên file ở đây, ví dụ "bai-hat.mp3".
+  music: "",
+
   // Ảnh kỷ niệm chạy dọc đường khi bật ô "Ảnh kỷ niệm" ở thanh chế độ.
   // Cách dùng: bỏ ảnh vào thư mục public/photos, rồi ghi tên file và chú thích ở đây (chú thích có thể bỏ trống).
   // Ảnh ngang hay dọc đều được; nên dùng ảnh khoảng 1600 px trở xuống cho nhẹ.
