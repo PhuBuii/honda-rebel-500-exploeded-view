@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a8e063"/>
+      <stop offset="1" stop-color="#2c7a4b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#g)"/>
+  <circle cx="840" cy="240" r="88" fill="#ffffff" fill-opacity="0.35"/>
+  <text x="50%" y="52%" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="133" font-weight="700" fill="#ffffff">Ảnh mẫu 6</text>
+  <text x="50%" y="62%" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="54" fill="#ffffff" fill-opacity="0.9">Thay bằng ảnh của bạn</text>
+</svg>

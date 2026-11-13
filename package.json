@@ -1,0 +1,18 @@
+{
+  "name": "rebel-500-exploded-view",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:draft": "vite build --mode draft",
+    "preview": "vite preview",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "three": "0.187.0",
+    "vite": "8.3.5",
+    "vitest": "5.0.5"
+  }
+}

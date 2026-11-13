@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#16262d" />
+    <title>Rebel 500</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600&family=Patrick+Hand&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <canvas id="stage" aria-label="Mô hình 3D chiếc Honda Rebel 500. Dùng danh sách bộ phận để chọn bằng bàn phím."></canvas>
+
+    <section id="intro" hidden>
+      <p id="intro-text"></p>
+      <div class="intro-actions">
+        <button id="view-whole" type="button" class="action action-outline">Xem nguyên xe</button>
+        <button id="explode" type="button" class="action">Tháo rời</button>
+      </div>
+    </section>
+
+    <nav id="modes" aria-label="Chế độ xem" hidden>
+      <div class="segmented" role="group" aria-label="Cách xem xe">
+        <button type="button" data-layout="assembled">Nguyên xe</button>
+        <button type="button" data-layout="exploded">Tháo rời</button>
+      </div>
+      <div class="segmented" id="ride-modes" role="group" aria-label="Trạng thái xe">
+        <button type="button" data-riding="false">Đứng yên</button>
+        <button type="button" data-riding="true">Đang chạy</button>
+      </div>
+      <label class="check" id="memories-label" hidden>
+        <input type="checkbox" id="memories-toggle" />
+        <span>Ảnh kỷ niệm</span>
+      </label>
+    </nav>
+
+    <nav id="shelf" aria-label="Các bộ phận" hidden>
+      <p id="hint">Bấm vào một bộ phận để đọc lời nhắn, kéo để xoay xe.</p>
+      <div class="shelf-row">
+        <p id="progress" aria-live="polite"></p>
+        <ul id="chips"></ul>
+      </div>
+    </nav>
+
+    <article id="tag" hidden>
+      <span class="tag-hole" aria-hidden="true"></span>
+      <h2 id="tag-title"></h2>
+      <p id="tag-caption"></p>
+      <p id="tag-text" aria-hidden="true"></p>
+      <p id="tag-announce" class="sr-only" aria-live="polite"></p>
+      <button id="tag-action" type="button" class="action action-ink"></button>
+    </article>
+
+    <div id="hover-label" hidden aria-hidden="true"></div>
+
+    <main id="fallback" hidden>
+      <p id="fallback-message"></p>
+      <p id="fallback-opening" class="hand"></p>
+      <dl id="fallback-list"></dl>
+      <p id="fallback-finale" class="hand"></p>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
