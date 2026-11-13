@@ -1,7 +1,7 @@
 // Bố trí các khung ảnh trên một dải lặp vô tận chạy ngang qua màn hình, không phụ thuộc Three.js.
 
-export const SPACING = 4.0; // khoảng cách giữa hai khung (m), theo cỡ ảnh để các ảnh không dính nhau
-export const LANE_SPEED = 1.1; // m/s: dải ở xa nên trôi chậm hơn mặt đường, mỗi ảnh nằm giữa khoảng 3,6 giây
+export const SPACING = 4.8; // khoảng cách giữa hai khung (m), theo cỡ ảnh để các ảnh không dính nhau
+export const LANE_SPEED = 1.32; // m/s: dải ở xa nên trôi chậm hơn mặt đường, mỗi ảnh nằm giữa khoảng 3,6 giây
 const MIN_SLOTS = 6; // tối thiểu để chỗ nối vòng nằm ngoài màn hình
 
 // Số khung trên dải; luôn là bội của số ảnh để thứ tự ảnh liền mạch khi dải quay vòng.

@@ -7,6 +7,7 @@ export function createState(partIds) {
     browse: 'exploded', // cách xem đang dùng, để quay lại sau khi đóng thẻ
     riding: false,
     memories: false, // ảnh kỷ niệm dọc đường; chỉ có khi xe chạy vì ảnh bám theo mặt đường
+    sound: true, // tiếng máy; trình duyệt chỉ cho phát sau lần bấm đầu tiên của người xem
     focused: null,
     seen: new Set(),
     partIds,
@@ -30,6 +31,10 @@ export function explode(state) {
 
 export function setRiding(state, riding) {
   return { ...state, riding, memories: riding && state.memories };
+}
+
+export function setSound(state, sound) {
+  return { ...state, sound };
 }
 
 export function setMemories(state, memories) {

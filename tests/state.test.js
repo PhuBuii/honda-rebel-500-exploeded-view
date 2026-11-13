@@ -9,6 +9,7 @@ import {
   setLayout,
   setMemories,
   setRiding,
+  setSound,
 } from '../src/state.js';
 
 const IDS = ['a', 'b'];
@@ -178,5 +179,56 @@ describe('memories', () => {
     const s = setMemories(setLayout(createState(IDS), 'assembled'), true);
     expect(setLayout(s, 'exploded').memories).toBe(true);
     expect(close(focus(s, 'a')).memories).toBe(true);
+  });
+});
+
+describe('entering from the intro', () => {
+  const enter = (withPhotos) => {
+    const s = setLayout(createState(IDS), 'assembled');
+    return withPhotos ? setMemories(s, true) : setRiding(s, true);
+  };
+
+  it('lands on the whole bike already riding with the photos on', () => {
+    const s = enter(true);
+    expect(s.screen).toBe('assembled');
+    expect(s.browse).toBe('assembled');
+    expect(s.riding).toBe(true);
+    expect(s.memories).toBe(true);
+  });
+
+  it('still rides when there are no photos to show', () => {
+    const s = enter(false);
+    expect(s.screen).toBe('assembled');
+    expect(s.riding).toBe(true);
+    expect(s.memories).toBe(false);
+  });
+
+  it('can browse and open parts right away', () => {
+    expect(isBrowsing(enter(true))).toBe(true);
+    expect(focus(enter(true), 'a').screen).toBe('focused');
+  });
+});
+
+describe('sound', () => {
+  it('is on by default', () => {
+    expect(createState(IDS).sound).toBe(true);
+  });
+
+  it('can be switched off and on again', () => {
+    const off = setSound(createState(IDS), false);
+    expect(off.sound).toBe(false);
+    expect(setSound(off, true).sound).toBe(true);
+  });
+
+  it('does not touch the ride, the photos or the screen', () => {
+    const before = setMemories(setLayout(createState(IDS), 'assembled'), true);
+    const after = setSound(before, false);
+    expect({ ...after, sound: true }).toEqual(before);
+  });
+
+  it('stays through parts and layouts', () => {
+    const s = setSound(setLayout(createState(IDS), 'assembled'), false);
+    expect(close(focus(s, 'a')).sound).toBe(false);
+    expect(setLayout(s, 'exploded').sound).toBe(false);
   });
 });

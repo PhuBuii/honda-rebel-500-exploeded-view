@@ -98,14 +98,6 @@ button {
   outline-color: var(--ink);
 }
 
-.action-outline {
-  background: transparent;
-  color: var(--lamp);
-}
-
-.action-outline:hover {
-  background: rgb(242 182 90 / 0.14);
-}
 
 .intro-actions {
   flex: none;

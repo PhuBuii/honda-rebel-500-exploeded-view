@@ -270,11 +270,12 @@ export function createMotion({ stage, parts, reducedMotion }) {
     },
 
     // Bật hoặc tắt ảnh kỷ niệm; máy quay bay đến khung hình mới nếu đang ở cách xem toàn cảnh.
-    async setMemories(on) {
+    // animate = false chỉ đặt cờ, dành cho lúc máy quay sắp bay tới khung hình đó bằng việc khác.
+    async setMemories(on, animate = true) {
       const next = Boolean(on) && stage.memories.count > 0 && !reducedMotion;
       if (next === memoriesOn) return;
       memoriesOn = next;
-      if (view.mode !== 'assembled' && view.mode !== 'exploded') return;
+      if (!animate || (view.mode !== 'assembled' && view.mode !== 'exploded')) return;
       stage.controls.enabled = false;
       await fly(browsePose());
       stage.controls.enabled = true;

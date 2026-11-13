@@ -3,16 +3,16 @@ import { glowMaterial } from './parts/shapes.js';
 import { focusAt, slotCount, slotPhoto, slotX } from './slideshow.js';
 
 // Dải ảnh polaroid treo trên một sợi dây phía sau đường, trôi chậm theo xe như phần "kỷ niệm".
-const CARD_W = 1.82;
-const CARD_H = 2.17;
-const PHOTO_H = 1.68;
-const BORDER = 0.098;
-const CARD_PX = 350; // điểm ảnh trên mỗi mét của ảnh dán lên khung
-const PIN_Y = 3.1; // độ cao sợi dây; đủ cao để đáy ảnh to không bị xe che
+const CARD_W = 2.18;
+const CARD_H = 2.6;
+const PHOTO_H = 2.02;
+const BORDER = 0.118;
+const CARD_PX = 320; // điểm ảnh trên mỗi mét của ảnh dán lên khung
+const PIN_Y = 3.55; // độ cao sợi dây; đủ cao để đáy ảnh to không bị xe che
 const LANE_Z = -4.5; // nằm sau lưng đường: xa camera nên trôi chậm và không che xe
 // Phần dải được tính khi canh khung camera. Cố ý hẹp hơn phần nhìn thấy thật: ảnh ở hai mép
 // màn hình bị cắt cũng không sao vì chúng đang trôi, còn xe thì phải giữ được cỡ to.
-const VISIBLE_HALF_WIDTH = 1.5;
+const VISIBLE_HALF_WIDTH = 1.7;
 const FOCUS_LIFT = 0.35; // ảnh ở giữa nhô về phía người xem một chút
 const MIN_SCALE = 0.8;
 const MAX_SCALE = 1.2;
@@ -113,7 +113,7 @@ export function createMemories() {
   object.visible = false;
 
   const stringMaterial = new THREE.MeshBasicMaterial({ color: '#d8c79c', transparent: true, toneMapped: false });
-  const string = new THREE.Mesh(new THREE.CylinderGeometry(0.014, 0.014, 60, 6), stringMaterial);
+  const string = new THREE.Mesh(new THREE.CylinderGeometry(0.017, 0.017, 60, 6), stringMaterial);
   string.rotation.z = Math.PI / 2;
   string.position.set(0, PIN_Y + 0.015, LANE_Z - 0.02);
   object.add(string);
@@ -124,7 +124,7 @@ export function createMemories() {
   function buildFrames(textures) {
     const cardGeometry = new THREE.PlaneGeometry(CARD_W, CARD_H);
     const haloGeometry = new THREE.PlaneGeometry(CARD_W * 2, CARD_H * 1.7);
-    const pinGeometry = new THREE.BoxGeometry(0.065, 0.17, 0.05);
+    const pinGeometry = new THREE.BoxGeometry(0.078, 0.2, 0.06);
     const pinMaterial = new THREE.MeshBasicMaterial({ color: '#a98255', transparent: true, toneMapped: false });
     const halo = haloTexture();
 
@@ -134,7 +134,7 @@ export function createMemories() {
       const swing = new THREE.Group();
       group.add(swing);
 
-      const centreY = -CARD_H / 2 - 0.08;
+      const centreY = -CARD_H / 2 - 0.096;
       const front = new THREE.Mesh(
         cardGeometry,
         new THREE.MeshBasicMaterial({ map: textures[slotPhoto(i, textures.length)], transparent: true, toneMapped: false }),
@@ -154,7 +154,7 @@ export function createMemories() {
       glow.position.set(0, centreY, -0.02);
 
       const pin = new THREE.Mesh(pinGeometry, pinMaterial);
-      pin.position.set(0, -0.03, 0.015);
+      pin.position.set(0, -0.036, 0.018);
       swing.add(glow, back, front, pin);
       object.add(group);
       return { group, swing, front, back, glow };

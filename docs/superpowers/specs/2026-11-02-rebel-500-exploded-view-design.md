@@ -32,8 +32,8 @@ Một trang web làm quà cá nhân. Người nhận mở link, xem chiếc Hond
 
 ## 3. Trải nghiệm người xem
 
-1. **Mở đầu:** chiếc xe nguyên vẹn tự xoay chậm trong studio tối, đèn ấm, kèm câu mở đầu và nút "Tháo rời".
-2. **Tháo rời:** bấm nút thì các bộ phận từ từ bung ra và lơ lửng quanh khung xe. Xe ngừng tự xoay, người xem kéo để xoay và chụm hoặc cuộn để phóng to trong giới hạn cho phép.
+1. **Mở đầu:** chiếc xe nguyên vẹn tự xoay chậm trong studio tối, đèn ấm, kèm câu mở đầu và một nút duy nhất "Tiến tới thôi nào bae!!".
+2. **Vào cảnh:** bấm nút thì xe vào thẳng cảnh nguyên xe, **mặc định đang chạy và ảnh kỷ niệm đã bật** (nếu có ảnh; không có ảnh thì chỉ chạy). Người xem vẫn đổi được sang "Tháo rời" ở thanh chế độ: các bộ phận từ từ bung ra và lơ lửng quanh khung xe, kéo để xoay và chụm hoặc cuộn để phóng to trong giới hạn cho phép.
 3. **Xem bộ phận:** bấm một bộ phận thì máy quay bay đến gần và khóa điều khiển xoay, các bộ phận khác mờ đi, tên bộ phận và lời nhắn hiện dần từng chữ. Bấm vào khung lời nhắn trong lúc chữ đang chạy sẽ hiện ngay toàn bộ.
 4. **Quay lại:** bấm nút đóng, bấm ra vùng trống hoặc nhấn Esc để về toàn cảnh. Bộ phận đã xem được đánh dấu nhẹ, tiến độ hiện dạng "3/12".
 5. **Kết thúc:** khi đóng bộ phận chưa xem cuối cùng, xe tự lắp lại và lời nhắn cuối hiện ra, kèm nút "Xem lại" để về bước 2 với tiến độ giữ nguyên.

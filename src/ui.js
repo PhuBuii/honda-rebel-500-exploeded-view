@@ -23,8 +23,7 @@ export function createUi({ content, partIds, reducedMotion, on }) {
   const hover = byId('hover-label');
 
   byId('intro-text').textContent = content.opening;
-  byId('explode').addEventListener('click', () => on.layout('exploded'));
-  byId('view-whole').addEventListener('click', () => on.layout('assembled'));
+  byId('start').addEventListener('click', () => on.start());
   tagAction.addEventListener('click', () => on.tagAction());
 
   const modes = byId('modes');

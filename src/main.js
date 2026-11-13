@@ -43,6 +43,7 @@ const ui = createUi({
   partIds: PART_IDS,
   reducedMotion,
   on: {
+    start: () => enterRide(),
     layout: (layout) => changeLayout(layout),
     riding: (riding) => changeRiding(riding),
     memories: (on) => applyRide((s) => setMemories(s, on)),
@@ -50,6 +51,26 @@ const ui = createUi({
     tagAction: () => (state.screen === 'finale' ? replayBike() : closePart()),
   },
 });
+
+// Nút ở trang mở đầu: vào thẳng cảnh nguyên xe, xe chạy và ảnh kỷ niệm đã bật sẵn.
+let photosReady = Promise.resolve(0);
+
+function enterRide() {
+  return run(async () => {
+    const photoCount = await photosReady;
+    state = setLayout(state, 'assembled');
+    if (!reducedMotion) state = photoCount > 0 ? setMemories(state, true) : setRiding(state, true);
+    ui.hideIntro();
+    ui.setHover(null);
+    motion.highlight(null);
+    ui.hideShelf();
+    motion.setRiding(state.riding);
+    // Đặt cờ trước rồi mới bay một lần, để máy quay không bay hai chặng.
+    await motion.setMemories(state.memories, false);
+    await motion.showLayout('assembled');
+    ui.showShelf(state);
+  });
+}
 
 function changeLayout(layout) {
   return run(async () => {
@@ -138,7 +159,10 @@ function start() {
   ui.showIntro();
 
   // Ảnh tải xong thì ô "Ảnh kỷ niệm" mới hiện; ảnh lỗi bị bỏ qua.
-  stage.memories.load(content.photos ?? []).then((count) => ui.setMemoriesAvailable(count));
+  photosReady = stage.memories.load(content.photos ?? []).then((count) => {
+    ui.setMemoriesAvailable(count);
+    return count;
+  });
 
   const pick = createPicker({ parts, camera: stage.camera, canvas });
 

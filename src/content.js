@@ -21,6 +21,11 @@ export const content = {
     { src: "image_3.jpg", caption: `` },
     { src: "image_4.jpg", caption: `` },
     { src: "image_5.jpg", caption: `` },
+    { src: "image_6.jpg", caption: `` },
+    { src: "image_7.jpg", caption: `` },
+    { src: "image_8.jpg", caption: `` },
+    { src: "image_9.jpg", caption: `` },
+    { src: "image_10.jpg", caption: `` },
   ],
 
   parts: {

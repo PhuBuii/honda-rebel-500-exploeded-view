@@ -13,7 +13,7 @@ const WORLD_UP = new THREE.Vector3(0, 1, 0);
 const LAYOUTS = {
   overview: { visible: [0.96, 0.8], shift: [0, 0.06] },
   // Có thêm dải ảnh phía trên xe nên dùng gần hết chiều cao màn hình.
-  memories: { visible: [0.96, 0.9], shift: [0, 0.03] },
+  memories: { visible: [0.96, 0.9], shift: [0, 0.07] },
   focusLandscape: { visible: [0.58, 0.92], shift: [0.18, 0] },
   focusPortrait: { visible: [0.94, 0.46], shift: [0, 0.25] },
 };
